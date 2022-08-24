@@ -32,7 +32,7 @@
 * **Dễ dàng bảo trì**: cú pháp đơn giản, hạn chế tối thiểu side effect (tác dụng phụ). Kèm theo đó Go bỏ qua một số đặc tính của OOP như:
 
 	* Không có Class. Mọi thứ đều được gói vào trong các package. Go chỉ có structs.
-	* Không hỗ trợ kết thừa.
+	* Không hỗ trợ kế thừa.
 	* Không constructor, annotation, generics hay exceptions.
 
 
