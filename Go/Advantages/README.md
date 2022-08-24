@@ -27,4 +27,13 @@
 	* _Sync.Mutex_: Khi một chương trình chạy concurrently, sẽ có những đoạn code dùng chung một tài nguyên. Nhưng những tài nguyên đó không thể cùng một lúc được truy cập đến bởi nhiều goroutine, vì nó sẽ gây ra xung đột. Đoạn code như vậy được gọi là critical section.  
 	Mutex viết tắt của Mutual Exclusion. Có nghĩa là loại trừ lẫn nhau. Nó giúp quản lí các tài nguyên dùng chung trong cùng một thời điểm chỉ có một concurrentcy sử dụng, sau khi sử dụng xong mới đưa tiếp cho concurency khác, tránh việc xung đột xảy ra.
 
-_**Khi dùng concurrentcy, nên có một khoảng nghỉ để các goroutine có đủ thời gian để hoàn thành trước khi chương trình kết thúc.**_
+	_**Khi dùng concurrentcy, nên có một khoảng nghỉ để các goroutine có đủ thời gian để hoàn thành trước khi chương trình kết thúc.**_
+
+* **Dễ dàng bảo trì**: cú pháp đơn giản, hạn chế tối thiểu side effect (tác dụng phụ). Kèm theo đó Go bỏ qua một số đặc tính của OOP như:
+
+	* Không có Class. Mọi thứ đều được gói vào trong các package. Go chỉ có structs.
+	* Không hỗ trợ kết thừa.
+	* Không constructor, annotation, generics hay exceptions.
+
+
+	Nhìn theo mặt tích cực thì nó giúp code ngắn gọn và dễ hiểu hơn.
