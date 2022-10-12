@@ -12,11 +12,9 @@
 
 ## __HTTP là gì?__
 
-Giao thức truyền siêu văn bản (The Hypertext Transfer Protocol) là nền tảng của WWW (*) được thiết kế để truyền thông tin giữa các thiết bị được nối mạng và chạy trên các lớp khác của ngăn xếp giao thức mạng. Một ví dụ điển hình cho HTTP là mô hình client-server.
+Giao thức truyền siêu văn bản (The Hypertext Transfer Protocol) là nền tảng của WWW (*) được thiết kế để truyền thông tin giữa các thiết bị được nối mạng và chạy trên các lớp khác của ngăn xếp giao thức mạng. Một ví dụ điển hình cho HTTP là mô hình [CLIENT-SERVER](./Client-Server.md).
 
-- [*World Wide Web*](https://vi.wikipedia.org/wiki/World_Wide_Web) - mạng lưới toàn cầu, là một không gian thông tin toàn cầu mà mọi người có thể truy cập) được sử dụng để tải các trang web bằng các liên kết siêu văn bản ([hypertext](https://vi.wikipedia.org/wiki/Si%C3%AAu_v%C4%83n_b%E1%BA%A3n) [link](https://vi.wikipedia.org/wiki/Si%C3%AAu_li%C3%AAn_k%E1%BA%BFt)) . HTTP là một giao thức [lớp ứng dụng](https://vi.wikipedia.org/wiki/T%E1%BA%A7ng_%E1%BB%A9ng_d%E1%BB%A5ng).
-
-- [*Client - Server*](https://vi.wikipedia.org/wiki/M%C3%B4_h%C3%ACnh_kh%C3%A1ch_%E2%80%93_ch%E1%BB%A7): mô hình Client server là mô hình mạng máy tính bao gồm 2 thành phần chính là máy khách (client) và máy chủ (server). Trong mô hình này, server là nơi lưu trữ tài nguyên, cài đặt các chương trình dịch vụ và thực hiện các yêu cầu của client. Client đón vai trò gửi yêu cầu đến server. Client gồm máy tính và thiết bị điện tử nói chung.. 
+- WWW (hay [*World Wide Web*](https://vi.wikipedia.org/wiki/World_Wide_Web) - mạng lưới toàn cầu) là một không gian thông tin toàn cầu mà mọi người có thể truy cập, được sử dụng để tải các trang web bằng các liên kết siêu văn bản ([hypertext](https://vi.wikipedia.org/wiki/Si%C3%AAu_v%C4%83n_b%E1%BA%A3n) [link](https://vi.wikipedia.org/wiki/Si%C3%AAu_li%C3%AAn_k%E1%BA%BFt)) . HTTP là một giao thức [lớp ứng dụng](https://vi.wikipedia.org/wiki/T%E1%BA%A7ng_%E1%BB%A9ng_d%E1%BB%A5ng).
 
 ## __HTTP request là gì?__
 
