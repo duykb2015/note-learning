@@ -1,5 +1,8 @@
 # HTTP
 
+> *Note: Để hiểu hết được phần này, trước tiên cần tìm hiểu kiến trúc [Client Server](./Client-Server.md)*
+
+
 >Nội dung:
 
 - [HTTP là gì?](#http-là-gì)
