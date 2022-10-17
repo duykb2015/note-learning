@@ -20,7 +20,7 @@ Client (máy khách) có thể là một hệ thống hoặc một chương trì
 
 Có thể chia ra làm 3 loại Client: thick, thin và hybird.
 
-* ***Thick Client:*** là loại Client có thể làm việc, thực hiện các thao tác mà không cần máy chủ, điển hình là máy tính cá nhân vì phần lớn các hoạt động trên máy tính không kết nối tởi máy chủ nào cả (ví dụ: tạo file, xoá file, ... những hành động này được thực hiện trực tiếp trên máy tính mà không cần kết nối tới máy chủ nào).
+* ***Thick Client:*** là loại Client có thể làm việc, thực hiện các thao tác mà không cần máy chủ, điển hình là máy tính cá nhân vì phần lớn các hoạt động trên máy tính không kết nối tởi máy chủ nào cả (ví dụ: tạo file, xoá file, ... những hành động này có thể thực hiện trực tiếp trên máy tính kể cả khi không có internet).
 
 * ***Thin Client***: là loại Client hoạt động phụ thuộc nhiều vào máy chủ, trình duyệt là một ví dụ. Hầu như mọi hoạt động, thao tác, dữ liệu trên một trang web của trình duyệt đều kết nối tới một Server.
 
@@ -70,7 +70,40 @@ Bây giờ, bạn có thể liên kết ví dụ trên với điều hướng đ
 
 Khi trình duyệt web gửi một yêu cầu đến máy chủ với DNS của trang web và máy chủ chấp thuận yêu cầu của khách hàng, nó sẽ gửi một thông báo thành công 200 OK. Thông báo này có nghĩa là máy chủ đã định vị trang web và nó sẽ gửi lại các tệp trang web dưới dạng phần nhỏ dữ liệu cho trình duyệt. Sau đó, trình duyệt sẽ thu thập và lắp ráp các phần nhỏ này lại để tạo thành trang web hoàn chỉnh và hiển thị cho chúng tôi.
 
-Chúng ta sẽ thảo luận thêm về yêu cầu HTTP và phản hồi trong các bài viết tiếp theo.
-
 # Các loại kiến trúc Client Server
 
+Kiến trúc Client-Server có bốn kiểu sau:
+
+* Kiến trúc 1 tầng (1-tier).
+
+* Kiến trúc 2 tầng (2-tier).
+
+* Kiến trúc 3 tầng (3-tier).
+
+* Kiến trúc N tầng (N-tier).
+
+### Kiến trúc 1 tầng
+
+Trong kiến ​​trúc 1 tầng, logic nghiệp vụ, logic dữ liệu và giao diện người dùng đều nằm trên cùng một máy. Môi trường đơn giản và rẻ vì máy khách và máy chủ nằm trên cùng một hệ thống, nhưng sự khác biệt về dữ liệu dẫn đến việc lặp lại công việc. Các hệ thống như vậy lưu trữ dữ liệu trong một tệp cục bộ hoặc một trình điều khiển được chia sẻ. Ví dụ về các ứng dụng 1 tầng là trình phát MP3 hoặc tệp MS Office.
+
+### Kiến trúc 2 tầng
+
+Kiến trúc 2 tầng cung cấp môi trường tốt nhất về mặt hiệu suất do không có bất kỳ máy chủ can thiệp nào. Giao diện người dùng nằm ở phía máy khách trong khi cơ sở dữ liệu ở phía máy chủ. Cơ sở dữ liệu và logic nghiệp vụ có thể được lưu trữ ở máy khách hoặc máy chủ, nhưng chúng phải không thay đổi.
+
+### Kiến trúc 3 tầng
+
+Kiến trúc 3 tầng liên quan đến một phần mềm trung gian được sử dụng để tương tác giữa máy khách và máy chủ. Mặc dù nó đắt tiền nhưng rất dễ sử dụng. Phần mềm trung gian cải thiện hiệu suất và tính linh hoạt. Nó lưu trữ business và data logic. 
+
+<!-- Ba lớp trong kiến ​​trúc 3 tầng là:
+
+* Presentation Layer (Client tier)
+* Application Layer (Business tier)
+* Database Layer (Data tier) -->
+
+Hầu hết tất cả các ứng dụng web đều là ví dụ về kiến ​​trúc 3 tầng.
+
+## Kiến trúc N tầng
+
+Kiến trúc n-tier là dạng thu nhỏ của kiến ​​trúc 3 tầng. Trong môi trường như vậy, chức năng xử lý, quản lý dữ liệu và trình bày được tách biệt trong các lớp khác nhau. Sự cách ly giúp hệ thống dễ dàng quản lý và bảo trì. Đây cũng được gọi là kiến ​​trúc nhiều tầng.
+
+> Không biết phải đi đâu? Tiếp tục với [HTTP](./HTTP.md)

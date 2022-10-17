@@ -1,9 +1,9 @@
 # HTTP
 
-> *Note: Để hiểu hết được phần này, trước tiên cần tìm hiểu kiến trúc [Client Server](./Client-Server.md)*
+> Để hiểu hết được phần này, trước tiên cần tìm hiểu kiến trúc [Client Server](./Client-Server.md)
 
 
->Nội dung:
+### Nội dung:
 
 - [HTTP là gì?](#http-là-gì)
 
@@ -91,3 +91,4 @@ Các thông số mà các bạn có thể gặp khá thường xuyên như:
 Cho phép client gừi đến yêu cầu bổ sung cần server thực hiện như: tạo mới hoặc cập nhật dữ liệu mà không thể truyền trên Header Parameters.
 
 > Source: [HTTP REQUEST](https://toolsqa.com/client-server/http-request/)
+
