@@ -35,7 +35,7 @@ EXPLAIN SELECT * FROM index_demo WHERE name = 'alex';
 
 !['...'](img/cTrVkwvORbzU51MvqnKt7sDTHfQznnjKKFsJ.png)
 
-`EXPLAIN` hiển thị cách công cụ truy vấn lập kế hoạch thực hiện truy vấn. Trong ảnh chụp màn hình ở trên, bạn có thể thấy rằng cột `rows` trả về `5` và `possible_keys` trả về `null`. `possible_keys` đại diện cho tất cả các chỉ số có sẵn có thể được sử dụng trong truy vấn này. Cột `key` biểu thị index nào thực sự sẽ được sử dụng trong số tất cả các index có thể có trong truy vấn này.
+`EXPLAIN` hiển thị cách công cụ truy vấn lập kế hoạch thực hiện truy vấn. Trong ảnh chụp màn hình ở trên, bạn có thể thấy rằng cột `rows` trả về `5` và `possible_keys` trả về `null`. `possible_keys` đại diện cho tất cả các chỉ số có sẵn có thể được sử dụng trong truy vấn này. Cột `key` biểu thị loại index nào được sử dụng trong truy vấn này.
 
 ## **Primary Key**
 
@@ -65,7 +65,7 @@ SHOW EXTENDED INDEX FROM index_demo;
 
 `EXTENDED` hiển thị tất cả các chỉ số mà người dùng không thể sử dụng được, nhưng được hoàn toàn quản lý bởi MySQL.
 
-Ở đây chúng ta thấy rằng MySQL đã xác định một index tổng hợp (chúng ta sẽ thảo luận về các index tổng hợp sau) trên `DB_ROW_ID` , `DB_TRX_ID`, `DB_ROLL_PTR` và tất cả các cột được xác định trong bảng. Trong trường hợp không có khóa chính do người dùng xác định, index này được sử dụng để tìm các bản ghi duy nhất.
+Ở đây chúng ta thấy rằng MySQL đã xác định một index tổng hợp (chúng ta sẽ thảo luận về các index tổng hợp sau) trên `DB_ROW_ID` , `DB_TRX_ID`, `DB_ROLL_PTR` và tất cả các cột được xác định trong bảng. Trong trường hợp không có khóa chính do người dùng xác định, index này được sử dụng để tìm các record duy nhất.
 
 ## **Sự khác biệt giữa key và index là gì?**
 
@@ -78,4 +78,99 @@ ALTER TABLE index_demo ADD PRIMARY KEY (phone_no);
 SHOW INDEXES FROM index_demo;
 ```
 
-https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/
+Lưu ý rằng không thể sử dụng lệnh `CREATE INDEX` để tạo primary index, nhưng lệnh `ALTER TABLE` thì có thể.
+
+!['...'](img/JMvreHhinpyihnKSQybzuyfDIAi2JWiIPCDh.png)
+
+Trong ảnh chụp ở trên, chúng ta thấy rằng một primary index được tạo trên cột `phone_no`. Các cột còn lại trong hình ảnh được mô tả như sau:
+
+`Table`: Bảng mà index được tạo.
+
+`Non_unique`: Nếu giá trị là 1, index không phải là duy nhất, nếu giá trị là 0, index là duy nhất.
+
+`Key_name`: Tên của index được tạo. Tên của primary index luôn là `PRIMARY` trong MySQL, bất kể bạn có nhập bất kỳ tên gì cho index hay không.
+
+`Seq_in_index`: Số thứ tự của cột trong index. Nếu nhiều cột là một phần của index, số thứ tự sẽ được chỉ định dựa trên cách các cột được sắp xếp trong thời gian tạo index. Số thứ tự bắt đầu từ 1.
+
+`Collation`: cách cột được sắp xếp trong index. `A` có nghĩa là tăng dần, `D` có nghĩa là giảm dần, `NULL` có nghĩa là không được sắp xếp.
+
+`Cardinality`: là số ước tính tổng số lượng các giá trị duy nhất trong index. Càng nhiều cardinality có nghĩa là cơ hội cao hơn mà trình tối ưu hóa truy vấn sẽ chọn index cho các truy vấn.
+
+`Sub_part` : Tiền tố index. Có giá trị là `NULL` nếu toàn bộ cột được lập index. Mặt khác, nó hiển thị số byte được lập index trong trường hợp chỉ có một số cột lập index.
+
+`Packed`: Cho biết khóa được đóng gói như thế nào; NULL nếu không có.
+
+`Null`: `YES` nếu cột có thể chứa giá trị `NULL` hoặc sẽ được để trống nếu cột không thể chứa giá trị `NULL`.
+
+`Index_type`: Cho biết cấu trúc dữ liệu lập index nào được sử dụng cho index này. Một số loại cấu trúc có thể là — `BTREE`, `HASH`, `RTREE` hoặc `FULLTEXT`.
+
+`Comment`: Thông tin về index không được mô tả trong cột riêng của nó.
+
+`Index_comment`: Nhận xét cho index được chỉ định khi bạn tạo index bằng thuộc tính `COMMENT`.
+
+Bây giờ, hãy xem liệu index này có làm giảm số hàng sẽ được tìm kiếm cho một `phone_no` nhất định trong mệnh đề WHERE của truy vấn hay không.
+
+```sql
+EXPLAIN SELECT * FROM index_demo WHERE phone_no = '9281072002';
+```
+
+![](img/TJz8cx0CrDPswJzfooUNA5HThlP5bAqZ5f8w.png)
+
+Trong ảnh chụp nhanh này, hãy lưu ý rằng cột `rows` chỉ trả về `1`, cả `possible_keys` và `key` đều trả về `PRIMARY`. Vì vậy, về cơ bản, điều đó có nghĩa là bằng cách sử dụng primary index có tên là `PRIMARY` (tên được gán tự động khi bạn tạo khóa chính), trình tối ưu hóa truy vấn chỉ cần truy cập trực tiếp vào record và tìm nạp nó. Nó rất hiệu quả. Đây chính xác là mục đích của một index - để giảm phạm vi tìm kiếm và nguyên sử dụng.
+
+## **Clustered Index**
+
+Một clustered index được sắp xếp với dữ liệu trong cùng một bảng hoặc cùng một tệp đĩa. Vì index và dữ liệu nằm cùng nhau, bạn có thể coi clustered index là B-Tree index có các nút lá là các block dữ liệu thực tế trên đĩa. Loại index này tổ chức vật lý dữ liệu trên đĩa theo thứ tự logic của khóa index.
+
+## **Tổ chức dữ liệu vật lý nghĩa là gì?**
+
+Về mặt vật lý, dữ liệu được tổ chức trên đĩa qua hàng nghìn hoặc hàng triệu block đĩa/dữ liệu. Các block dữ liệu vật lý luôn được HĐH di chuyển khắp nơi bất cứ khi nào cần thiết. Tuy nhiên một hệ thống cơ sở dữ liệu không thể làm như vậy, nó chỉ có thể quản lý dữ liệu trong một block dữ liệu, các record có thể được lưu trữ hoặc quản lý theo thứ tự logic của khóa index.
+
+!["..."](img/aVIkXV0c5nNwQHjL1T501JC0OG-E9iZGzt3H.png)
+
+- Hình chữ nhật lớn màu vàng đại diện cho block đĩa/block dữ liệu.
+
+- Các hình chữ nhật màu xanh đại diện cho dữ liệu được lưu trữ dưới dạng các hàng bên trong block đó.
+
+- Khu vực chân trang biểu thị index của block, nơi các hình chữ nhật nhỏ màu đỏ nằm theo thứ tự được sắp xếp một cách cụ thể, nó là những con trỏ trỏ đến vị trí của record.
+
+Các record được lưu trữ trên block đĩa theo bất kỳ thứ tự tùy ý nào. Bất cứ khi nào các record mới được thêm vào, chúng sẽ được thêm vào không gian có sẵn tiếp theo, và record được cập nhật, hệ điều hành sẽ quyết định xem record đó vẫn có thể vừa với vị trí cũ hay phải được phân bổ một vị trí mới.
+
+Vì vậy, vị trí của các record được hệ điều hành xử lý hoàn toàn và các record độc lập với nhau. Để tìm nạp các record chỉ cần sử dụng các con trỏ ở phần chân trang. Mỗi khi một record được thay đổi hoặc tạo ra, index sẽ được điều chỉnh.
+
+Theo cách này, bạn thực sự không cần quan tâm đến việc chức record vật lý theo một thứ tự nhất định, thay vào đó, một phần index nhỏ được duy trì theo thứ tự đó và việc tìm nạp hoặc duy trì record trở nên rất dễ dàng.
+
+## **Ưu điểm của Clustered Index**
+
+Sắp xếp thứ tự và việc dữ liệu nằm cùng một vị trí như vậy thực sự làm cho clustered index nhanh hơn. Khi dữ liệu được tìm nạp từ đĩa, toàn bộ block chứa dữ liệu sẽ được hệ thống đọc đến, bởi hệ thống ổ đĩa của chúng ta đọc và ghi dữ liệu theo block. Vì vậy, trong trường hợp truy vấn phạm vi, dữ liệu đã được sắp xếp sẽ lưu tạm thời vào bộ nhớ đệm. Giả sử bạn thực hiện truy vấn sau:
+
+```sql
+SELECT * FROM index_demo WHERE phone_no > '9010000000' AND phone_no < '9020000000'
+```
+
+Một block dữ liệu được tìm và nạp vào trong bộ nhớ (ram) khi truy vấn được thực hiện. Giả sử block dữ liệu chứa `phone_no` có giá trị trong phạm vi từ `9010000000` đến `9020000000`. Chẳng hạn như bây giờ bạn cần thực hiện một truy vấn tiếp lấy dữ liệu có giá trị trong phạm vi từ `9015000000` đến `9019000000`, thì bạn không cần phải tìm nạp thêm bất kỳ block nào từ đĩa nữa vì nó đã có sẵn ở trên bộ nhớ hiện tại, do đó, `clustered_index` cải thiện hiệu xuất bằng cách sắp xếp dữ liệu liên quan càng nhiều càng tốt trong cùng một block dữ liệu.
+
+Vì vậy, nếu bạn hiểu rõ về khóa chính và các truy vấn của bạn dựa trên khóa chính, thì hiệu suất sẽ cực kỳ nhanh.
+
+## **Các ràng buộc của Clustered Index**
+
+Vì index được nhóm tác động đến tổ chức vật lý của dữ liệu nên chỉ có thể có một clustered index trên mỗi bảng.
+
+## **Mối quan hệ giữa Primary Key và Clustered Index**
+
+Bạn không thể tạo clustered index theo cách thủ công bằng InnoDB trong MySQL. MySQL chọn nó cho bạn. Nhưng nó chọn như thế nào? Các đoạn trích sau đây là từ tài liệu MySQL:
+
+> Khi bạn xác định một `PRIMARY KEY` trên bảng của mình, `InnoDB` sẽ sử dụng nó làm clustered index. Xác định khóa chính cho mỗi bảng mà bạn tạo. Nếu một hoặc nhiều cột trong bảng có thể chứa giá trị trùng lặp, hãy thêm một cột mới có thuộc tính là auto-increment, thuộc tính ngày sẽ tự động điền vào cột một giá trị riêng biệt với càng hàng khác khi có dữ liệu mới được thêm vào. </br></br>
+Nếu bạn không xác định `PRIMARY KEY` cho bảng của mình, MySQL sẽ tự định vị index `UNIQUE` đầu tiên mà nó tìm thấy có thuộc tính `NOT NULL` và `InnoDB` sẽ sử dụng cột đó làm clustered index. </br></br>
+Nếu bảng không có `PRIMARY KEY` hoặc index `UNIQUE` phù hợp, `InnoDB` sẽ tự tạo một clustered index ẩn có tên `GEN_CLUST_INDEX` trên một cột tổng hợp chứa các giá trị ID hàng. `InnoDB` sẽ gán cho các hàng một ID và sắp xếp chúng. ID hàng là một trường 6 byte tăng tịnh tiến khi các hàng mới được chèn vào. Do đó, các hàng được sắp xếp theo ID theo thứ tự tăng dần.
+
+Nói tóm lại, công cụ InnoDB của MySQL quản lý primary index dưới dạng clustered index để cải thiện hiệu suất, do đó, khóa chính và record trên đĩa được nhóm lại với nhau.
+
+## **Cấu trúc của Primary key (clustered) Index**
+
+Một index thường được duy trì dưới dạng B+ Tree trên đĩa và trong bộ nhớ, bất kỳ index nào cũng được lưu trữ trong các block trên đĩa. Các block này được gọi là block index. Các mục trong block index luôn được sắp xếp theo khóa index/search. block chỉ số lá của index chứa bộ định vị hàng. Đối với index chính, bộ định vị hàng đề cập đến địa chỉ ảo của vị trí vật lý tương ứng của các block dữ liệu trên đĩa nơi các hàng cư trú được sắp xếp theo khóa index.
+
+Trong sơ đồ sau, các hình chữ nhật bên trái biểu thị các block index cấp độ lá và các hình chữ nhật bên phải biểu thị các block dữ liệu. Về mặt logic, các block dữ liệu có vẻ được căn chỉnh theo thứ tự đã sắp xếp, nhưng như đã mô tả trước đó, trong thực chúng có thể nằm rải rác trong block.
+
+![''](img/9IxaFv3dJJe6m0NotCQC6wXzzo6bcGQwwNCu.png)
+
