@@ -114,7 +114,7 @@ Bây giờ, hãy xem liệu index này có làm giảm số hàng sẽ được 
 EXPLAIN SELECT * FROM index_demo WHERE phone_no = '9281072002';
 ```
 
-![](img/TJz8cx0CrDPswJzfooUNA5HThlP5bAqZ5f8w.png)
+![''](img/TJz8cx0CrDPswJzfooUNA5HThlP5bAqZ5f8w.png)
 
 Trong ảnh chụp nhanh này, hãy lưu ý rằng cột `rows` chỉ trả về `1`, cả `possible_keys` và `key` đều trả về `PRIMARY`. Vì vậy, về cơ bản, điều đó có nghĩa là bằng cách sử dụng primary index có tên là `PRIMARY` (tên được gán tự động khi bạn tạo khóa chính), trình tối ưu hóa truy vấn chỉ cần truy cập trực tiếp vào record và tìm nạp nó. Nó rất hiệu quả. Đây chính xác là mục đích của một index - để giảm phạm vi tìm kiếm và nguyên sử dụng.
 
@@ -174,3 +174,28 @@ Trong sơ đồ sau, các hình chữ nhật bên trái biểu thị các block 
 
 ![''](img/9IxaFv3dJJe6m0NotCQC6wXzzo6bcGQwwNCu.png)
 
+## **Có thể tạo index trên cột không phải khoá chính?**
+
+Mặc dù một primary index sẽ được tạo tự động, tuy nhiên không thực sự bắt buộc phải tạo index trên  khóa chính - primary index có thể được tạo trên bất kỳ cột nào. Chẳng qua khi được tạo trên primary key, tất cả các giá trị phải là UNIQUE, còn trong trường hợp khác, chỉ mục chính có thể có giá trị trùng lặp.
+
+## **Có thể xóa primary key không?**
+
+Có thể. Tuy nhiên khi bạn xóa một khóa chính, clustered index có liên quan cũng như thuộc tính UNIQUE của cột đó cũng sẽ mất theo.
+
+```sql
+ALTER TABLE `index_demo` DROP PRIMARY KEY;
+
+- Nếu primary key không tồn tại, bạn sẽ nhận được lỗi sau:
+
+"ERROR 1091 (42000): Can't DROP 'PRIMARY'; check that column/key exists"
+```
+
+## **Ưu điểm của Primary Index**
+
+- Các truy vấn phạm vi dựa trên primary index rất hiệu quả. Vì primary index được gộp nhóm lại và các record được sắp xếp theo thứ tự, nên toàn bộ dữ liệu liên quan đến câu truy vấn sẽ được đưa vào một block đĩa. Vì vậy, vị trí của dữ liệu trong block đó có thể được cung cấp bởi primary index.
+
+- Bất kỳ truy vấn nào sử dụng khóa chính đều rất nhanh.
+
+## **Nhược điểm của Primary Index**
+
+Vì primary index chứa tham chiếu trực tiếp đến địa chỉ block dữ liệu thông qua không gian địa chỉ ảo và các block đĩa được tổ chức vật lý theo thứ tự của khóa index, nên mỗi khi HĐH thực hiện phân tách một số trang đĩa do hoạt động DML như INSERT/ UPDATE/DELETE, primary index cũng cần được cập nhật. Vì vậy, DML có thể gây ảnh hưởng tới các primary index.
