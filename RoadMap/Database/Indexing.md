@@ -41,21 +41,21 @@ EXPLAIN SELECT * FROM index_demo WHERE name = 'alex';
 
 Truy vấn trên rất kém hiệu quả. Hãy tối ưu hóa truy vấn này. Ta sẽ chuyển cột `phone_no` thành `PRIMARY KEY` với giả định rằng không hai tài khoản có cùng một số điện thoại trong hệ thống của chúng ta. Nhưng trước tiên cần phải lưu ý những điều sau:
 
-- Khóa chính phải là một phần của nhiều truy vấn quan trọng trong ứng dụng của bạn.
+- primary key phải là một phần của nhiều truy vấn quan trọng trong ứng dụng của bạn.
 
-- Khóa chính là một ràng buộc xác định mỗi hàng trong một bảng là duy nhất. Nếu nhiều cột là một phần của khóa chính, thì sự kết hợp đó phải là duy nhất cho mỗi hàng.
+- primary key là một ràng buộc xác định mỗi hàng trong một bảng là duy nhất. Nếu nhiều cột là một phần của primary key, thì sự kết hợp đó phải là duy nhất cho mỗi hàng.
 
-- Khóa chính phải là Non-null. Một cột có thể chứa giá trị rỗng không thể trờ thành một khóa chính. Theo tiêu chuẩn ANSI SQL, các khóa chính phải tương đương với nhau và bạn chắc chắn có thể biết liệu giá trị của cột khóa chính này lớn hơn, nhỏ hơn hay bằng giá trị của một cột khoá chính khác. Vì `NULL` có nghĩa là một giá trị không xác định (*undefined*) trong các tiêu chuẩn SQL, nên bạn không thể so sánh một cách xác định `NULL` với bất kỳ giá trị nào khác, vì vậy `NULL` về mặt logic là không được phép.
+- primary key phải là Non-null. Một cột có thể chứa giá trị rỗng không thể trờ thành một primary key. Theo tiêu chuẩn ANSI SQL, các primary key phải tương đương với nhau và bạn chắc chắn có thể biết liệu giá trị của cột primary key này lớn hơn, nhỏ hơn hay bằng giá trị của một cột khoá chính khác. Vì `NULL` có nghĩa là một giá trị không xác định (*undefined*) trong các tiêu chuẩn SQL, nên bạn không thể so sánh một cách xác định `NULL` với bất kỳ giá trị nào khác, vì vậy `NULL` về mặt logic là không được phép.
 
-- Loại khóa chính lý tưởng phải là một số như `INT` hoặc `BIGINT` vì so sánh số nguyên nhanh hơn, nên việc duyệt qua index sẽ rất nhanh.
+- Loại primary key lý tưởng phải là một số như `INT` hoặc `BIGINT` vì so sánh số nguyên nhanh hơn, nên việc duyệt qua index sẽ rất nhanh.
 
-Thông thường, chúng ta xác định trường `id` là `AUTO INCREMENT` trong bảng và sử dụng trường đó làm khóa chính, nhưng việc lựa chọn khóa chính là phụ thuộc vào nhà phát triển.
+Thông thường, chúng ta xác định trường `id` là `AUTO INCREMENT` trong bảng và sử dụng trường đó làm primary key, nhưng việc lựa chọn primary key là phụ thuộc vào nhà phát triển.
 
-## **Điều gì sẽ xảy ra nếu bạn không tự tạo bất kỳ khóa chính nào?**
+## **Điều gì sẽ xảy ra nếu bạn không tự tạo bất kỳ primary key nào?**
 
-Không bắt buộc phải tự tạo khóa chính. Nếu bạn chưa xác định bất kỳ khóa chính nào, InnoDB sẽ ngầm tạo một khóa cho bạn vì InnoDB theo thiết kế phải có một khóa chính trong mỗi bảng. Vì vậy, sau khi bạn tạo khóa chính cho bảng đó, InnoDB sẽ xóa khóa chính được xác định tự động trước đó.
+Không bắt buộc phải tự tạo primary key. Nếu bạn chưa xác định bất kỳ primary key nào, InnoDB sẽ ngầm tạo một khóa cho bạn vì InnoDB theo thiết kế phải có một primary key trong mỗi bảng. Vì vậy, sau khi bạn tạo primary key cho bảng đó, InnoDB sẽ xóa primary key được xác định tự động trước đó.
 
-Vì hiện tại chúng ta không có bất kỳ khóa chính nào được xác định, hãy xem InnoDB theo mặc định sẽ tạo ra những gì cho chúng ta:
+Vì hiện tại chúng ta không có bất kỳ primary key nào được xác định, hãy xem InnoDB theo mặc định sẽ tạo ra những gì cho chúng ta:
 
 ```sql
 SHOW EXTENDED INDEX FROM index_demo;
@@ -65,11 +65,11 @@ SHOW EXTENDED INDEX FROM index_demo;
 
 `EXTENDED` hiển thị tất cả các chỉ số mà người dùng không thể sử dụng được, nhưng được hoàn toàn quản lý bởi MySQL.
 
-Ở đây chúng ta thấy rằng MySQL đã xác định một index tổng hợp (chúng ta sẽ thảo luận về các index tổng hợp sau) trên `DB_ROW_ID` , `DB_TRX_ID`, `DB_ROLL_PTR` và tất cả các cột được xác định trong bảng. Trong trường hợp không có khóa chính do người dùng xác định, index này được sử dụng để tìm các record duy nhất.
+Ở đây chúng ta thấy rằng MySQL đã xác định một index tổng hợp (chúng ta sẽ thảo luận về các index tổng hợp sau) trên `DB_ROW_ID` , `DB_TRX_ID`, `DB_ROLL_PTR` và tất cả các cột được xác định trong bảng. Trong trường hợp không có primary key do người dùng xác định, index này được sử dụng để tìm các record duy nhất.
 
 ## **Sự khác biệt giữa key và index là gì?**
 
-Mặc dù các thuật ngữ `key` và `index` được sử dụng thay thế cho nhau, nhưng `key` có nghĩa là một ràng buộc áp đặt lên hành vi của cột. Trong trường hợp này, ràng buộc là khóa chính không được phép rỗng, là trường dùng để xác định mỗi hàng. Mặt khác, `index` là một cấu trúc dữ liệu đặc biệt giúp tạo điều kiện tìm kiếm dữ liệu trên bảng.
+Mặc dù các thuật ngữ `key` và `index` được sử dụng thay thế cho nhau, nhưng `key` có nghĩa là một ràng buộc áp đặt lên hành vi của cột. Trong trường hợp này, ràng buộc là primary key không được phép rỗng, là trường dùng để xác định mỗi hàng. Mặt khác, `index` là một cấu trúc dữ liệu đặc biệt giúp tạo điều kiện tìm kiếm dữ liệu trên bảng.
 
 Bây giờ, hãy tạo index chính trên `phone_no` và kiểm tra index đã tạo:
 
@@ -116,7 +116,7 @@ EXPLAIN SELECT * FROM index_demo WHERE phone_no = '9281072002';
 
 ![''](img/TJz8cx0CrDPswJzfooUNA5HThlP5bAqZ5f8w.png)
 
-Trong ảnh chụp nhanh này, hãy lưu ý rằng cột `rows` chỉ trả về `1`, cả `possible_keys` và `key` đều trả về `PRIMARY`. Vì vậy, về cơ bản, điều đó có nghĩa là bằng cách sử dụng primary index có tên là `PRIMARY` (tên được gán tự động khi bạn tạo khóa chính), trình tối ưu hóa truy vấn chỉ cần truy cập trực tiếp vào record và tìm nạp nó. Nó rất hiệu quả. Đây chính xác là mục đích của một index - để giảm phạm vi tìm kiếm và nguyên sử dụng.
+Trong ảnh chụp nhanh này, hãy lưu ý rằng cột `rows` chỉ trả về `1`, cả `possible_keys` và `key` đều trả về `PRIMARY`. Vì vậy, về cơ bản, điều đó có nghĩa là bằng cách sử dụng primary index có tên là `PRIMARY` (tên được gán tự động khi bạn tạo primary key), trình tối ưu hóa truy vấn chỉ cần truy cập trực tiếp vào record và tìm nạp nó. Nó rất hiệu quả. Đây chính xác là mục đích của một index - để giảm phạm vi tìm kiếm và nguyên sử dụng.
 
 ## **Clustered Index**
 
@@ -150,7 +150,7 @@ SELECT * FROM index_demo WHERE phone_no > '9010000000' AND phone_no < '902000000
 
 Một block dữ liệu được tìm và nạp vào trong bộ nhớ (ram) khi truy vấn được thực hiện. Giả sử block dữ liệu chứa `phone_no` có giá trị trong phạm vi từ `9010000000` đến `9020000000`. Chẳng hạn như bây giờ bạn cần thực hiện một truy vấn tiếp lấy dữ liệu có giá trị trong phạm vi từ `9015000000` đến `9019000000`, thì bạn không cần phải tìm nạp thêm bất kỳ block nào từ đĩa nữa vì nó đã có sẵn ở trên bộ nhớ hiện tại, do đó, `clustered_index` cải thiện hiệu xuất bằng cách sắp xếp dữ liệu liên quan càng nhiều càng tốt trong cùng một block dữ liệu.
 
-Vì vậy, nếu bạn hiểu rõ về khóa chính và các truy vấn của bạn dựa trên khóa chính, thì hiệu suất sẽ cực kỳ nhanh.
+Vì vậy, nếu bạn hiểu rõ về primary key và các truy vấn của bạn dựa trên primary key, thì hiệu suất sẽ cực kỳ nhanh.
 
 ## **Các ràng buộc của Clustered Index**
 
@@ -160,11 +160,11 @@ Vì index được nhóm tác động đến tổ chức vật lý của dữ li
 
 Bạn không thể tạo clustered index theo cách thủ công bằng InnoDB trong MySQL. MySQL chọn nó cho bạn. Nhưng nó chọn như thế nào? Các đoạn trích sau đây là từ tài liệu MySQL:
 
-> Khi bạn xác định một `PRIMARY KEY` trên bảng của mình, `InnoDB` sẽ sử dụng nó làm clustered index. Xác định khóa chính cho mỗi bảng mà bạn tạo. Nếu một hoặc nhiều cột trong bảng có thể chứa giá trị trùng lặp, hãy thêm một cột mới có thuộc tính là auto-increment, thuộc tính ngày sẽ tự động điền vào cột một giá trị riêng biệt với càng hàng khác khi có dữ liệu mới được thêm vào. </br></br>
+> Khi bạn xác định một `PRIMARY KEY` trên bảng của mình, `InnoDB` sẽ sử dụng nó làm clustered index. Xác định primary key cho mỗi bảng mà bạn tạo. Nếu một hoặc nhiều cột trong bảng có thể chứa giá trị trùng lặp, hãy thêm một cột mới có thuộc tính là auto-increment, thuộc tính ngày sẽ tự động điền vào cột một giá trị riêng biệt với càng hàng khác khi có dữ liệu mới được thêm vào. </br></br>
 Nếu bạn không xác định `PRIMARY KEY` cho bảng của mình, MySQL sẽ tự định vị index `UNIQUE` đầu tiên mà nó tìm thấy có thuộc tính `NOT NULL` và `InnoDB` sẽ sử dụng cột đó làm clustered index. </br></br>
 Nếu bảng không có `PRIMARY KEY` hoặc index `UNIQUE` phù hợp, `InnoDB` sẽ tự tạo một clustered index ẩn có tên `GEN_CLUST_INDEX` trên một cột tổng hợp chứa các giá trị ID hàng. `InnoDB` sẽ gán cho các hàng một ID và sắp xếp chúng. ID hàng là một trường 6 byte tăng tịnh tiến khi các hàng mới được chèn vào. Do đó, các hàng được sắp xếp theo ID theo thứ tự tăng dần.
 
-Nói tóm lại, công cụ InnoDB của MySQL quản lý primary index dưới dạng clustered index để cải thiện hiệu suất, do đó, khóa chính và record trên đĩa được nhóm lại với nhau.
+Nói tóm lại, công cụ InnoDB của MySQL quản lý primary index dưới dạng clustered index để cải thiện hiệu suất, do đó, primary key và record trên đĩa được nhóm lại với nhau.
 
 ## **Cấu trúc của Primary key (clustered) Index**
 
@@ -176,11 +176,11 @@ Trong sơ đồ sau, các hình chữ nhật bên trái biểu thị các block 
 
 ## **Có thể tạo index trên cột không phải khoá chính?**
 
-Mặc dù một primary index sẽ được tạo tự động, tuy nhiên không thực sự bắt buộc phải tạo index trên  khóa chính - primary index có thể được tạo trên bất kỳ cột nào. Chẳng qua khi được tạo trên primary key, tất cả các giá trị phải là UNIQUE, còn trong trường hợp khác, chỉ mục chính có thể có giá trị trùng lặp.
+Mặc dù một primary index sẽ được tạo tự động, tuy nhiên không thực sự bắt buộc phải tạo index trên  primary key - primary index có thể được tạo trên bất kỳ cột nào. Chẳng qua khi được tạo trên primary key, tất cả các giá trị phải là UNIQUE, còn trong trường hợp khác, chỉ mục chính có thể có giá trị trùng lặp.
 
 ## **Có thể xóa primary key không?**
 
-Có thể. Tuy nhiên khi bạn xóa một khóa chính, clustered index có liên quan cũng như thuộc tính UNIQUE của cột đó cũng sẽ mất theo.
+Có thể. Tuy nhiên khi bạn xóa một primary key, clustered index có liên quan cũng như thuộc tính UNIQUE của cột đó cũng sẽ mất theo.
 
 ```sql
 ALTER TABLE `index_demo` DROP PRIMARY KEY;
@@ -194,8 +194,44 @@ ALTER TABLE `index_demo` DROP PRIMARY KEY;
 
 - Các truy vấn phạm vi dựa trên primary index rất hiệu quả. Vì primary index được gộp nhóm lại và các record được sắp xếp theo thứ tự, nên toàn bộ dữ liệu liên quan đến câu truy vấn sẽ được đưa vào một block đĩa. Vì vậy, vị trí của dữ liệu trong block đó có thể được cung cấp bởi primary index.
 
-- Bất kỳ truy vấn nào sử dụng khóa chính đều rất nhanh.
+- Bất kỳ truy vấn nào sử dụng primary key đều rất nhanh vì có thể sử dụng Binary Search do dữ liệu đã được sắp xếp sẵn.
 
 ## **Nhược điểm của Primary Index**
 
-Vì primary index chứa tham chiếu trực tiếp đến địa chỉ block dữ liệu thông qua không gian địa chỉ ảo và các block đĩa được tổ chức vật lý theo thứ tự của khóa index, nên mỗi khi HĐH thực hiện phân tách một số trang đĩa do hoạt động DML như INSERT/ UPDATE/DELETE, primary index cũng cần được cập nhật. Vì vậy, DML có thể gây ảnh hưởng tới các primary index.
+Primary index chứa tham chiếu trực tiếp đến địa chỉ block dữ liệu thông qua không gian địa chỉ ảo và các block đĩa được tổ chức vật lý theo thứ tự của khóa index, nên mỗi khi HĐH thực hiện phân tách một số trang đĩa do hoạt động DML như INSERT/UPDATE/DELETE, primary index cũng cần được cập nhật, mà các index được sắp xếp một cách tuần tự, nên tốc độ thực hiện các hoạt động DML sẽ bị giảm xuống vì primary index cần sắp xếp lại index cho các record.
+
+## **Secondary Index**
+
+Bất kỳ index nào khác ngoài clustered index được gọi là secondary index. Các secondary index không ảnh hưởng đến các vị trí lưu trữ vật lý không giống như các index chính.
+
+## **Khi nào bạn cần secondary index**
+
+Bạn có thể có một số trường hợp sử dụng trong ứng dụng của mình mà bạn không truy vấn cơ sở dữ liệu bằng primary key. Trong ví dụ của chúng ta, `phone_no` là primary key nhưng chúng ta có thể cần truy vấn cơ sở dữ liệu bằng `pan_no` hoặc `name`. Trong những trường hợp như vậy, bạn cần secondary index trên các cột này nếu tần suất của các truy vấn đó rất cao.
+
+## **Làm cách nào để tạo secondary index trong MySQL?**
+
+Lệnh sau tạo một secondary index trong cột `name` trong bảng `index_demo`.
+
+```sql
+CREATE INDEX secondary_idx_1 ON index_demo (name);
+```
+
+!["..."](img/iWZI5S-Lqf9EljZxrNpmFCIajB8kmsTVkQ0i.png)
+
+## **Cấu trúc của secondary index**
+
+Trong sơ đồ bên dưới, các hình chữ nhật màu đỏ đại diện cho các block secondary index. Secondary index cũng được duy trì trong B+ Tree và nó được sắp xếp theo khóa mà index được tạo. Các nút lá chứa một bản sao khóa của dữ liệu tương ứng trong primary index.
+
+Vì vậy, để dễ hiểu, bạn có thể cho rằng secondary index có tham chiếu đến địa chỉ của primary key, mặc dù thực tế không phải vậy. Truy xuất dữ liệu thông qua secondary index có nghĩa là bạn phải duyệt qua hai cây B+: một là chính cây B+ chứa secondary index và cây còn lại là cây B+ primary index.
+
+![''](img/0eg06hWYJWhXPt1QNuaDlETYrmnSKAo6Nf44.png)
+
+## **Ưu điểm của Secondary Index**
+
+Về mặt logic, bạn có thể tạo bao nhiêu secondary index tùy ý. Nhưng trên thực tế việc tạo ra bao nhiêu index thực sự cần phải được cân nhắc vì mỗi index có một hạn chế riêng.
+
+## **Nhược điểm của Secondary Index**
+
+Với các thao tác DML như DELETE/INSERT, secondary index cũng cần được cập nhật để có thể xóa/chèn bản sao của cột primary key. Trong những trường hợp như vậy, sự tồn tại của nhiều secondary index có thể tạo ra vấn đề.
+
+Ngoài ra, nếu một primary key quá lớn, ví như một URL, vì các secondary index chứa một bản sao của giá trị cột primary key, nên nó có thể không hiệu quả về mặt lưu trữ. Nhiều khóa phụ hơn có nghĩa là số lượng bản sao trùng lặp của giá trị cột primary key lớn hơn, do đó, nhiều bộ nhớ hơn trong trường hợp primary key lớn. Ngoài ra, primary key lưu trữ các khóa, vì vậy hiệu quả tổng hợp về lưu trữ sẽ rất cao.
