@@ -15,6 +15,7 @@ Mục đích chính của Hệ điều hành là cho phép các ứng dụng (so
 Một số Hệ điều hành phổ biến hiện nay bao gồm: Linux,Windows, VMS, OS/400, AIX, z/OS, v.v. Ngày nay, Hệ điều hành được tìm thấy hầu hết trong mọi thiết bị như điện thoại di động, máy tính cá nhân, máy tính lớn, ô tô, TV , Đồ chơi ...
 
 ## **Cấu trúc của hệ điều hành**
+
 ![Cấu trúc hdh](img/conceptual_view.jpg)
 
 ## **Các chức năng quan trọng của hệ điều hành**
@@ -23,7 +24,7 @@ Một số Hệ điều hành phổ biến hiện nay bao gồm: Linux,Windows, 
 
 **Quản lý bộ nhớ** đề cập đến việc quản lý **Primary Memory** hoặc **Main Memory**. **Bộ nhớ chính** là một mảng lớn các *word* hoặc *byte* trong đó mỗi *word* hoặc *byte* có địa chỉ riêng của nó.
 
-**Bộ nhớ chính** cung cấp khả năng lưu trữ nhanh chóng có thể được CPU truy cập trực tiếp. Để một chương trình được thực thi, chương trình đó phải nằm trong bộ nhớ chính. 
+**Bộ nhớ chính** cung cấp khả năng lưu trữ nhanh chóng có thể được CPU truy cập trực tiếp. Để một chương trình được thực thi, chương trình đó phải nằm trong bộ nhớ chính.
 
 Hệ điều hành thực hiện các hoạt động sau để quản lý bộ nhớ:
 
@@ -35,10 +36,9 @@ Hệ điều hành thực hiện các hoạt động sau để quản lý bộ n
 
 - Thu hồi bộ nhớ khi một tiến trình không còn cần sử dụng hoặc đã kết thúc.
 
-
 ### **Processor Management**
 
-**Quản lý bộ xử lý**: trong môi trường đa chương trình (multiprogramming), hệ điều hành quyết định tiến trình nào lấy bộ xử lý khi nào và trong bao lâu. Chức năng này được gọi là **lập lịch trình process scheduling**. 
+**Quản lý bộ xử lý**: trong môi trường đa chương trình (multiprogramming), hệ điều hành quyết định tiến trình nào lấy bộ xử lý khi nào và trong bao lâu. Chức năng này được gọi là **lập lịch trình process scheduling**.
 
 Hệ điều hành thực hiện các hoạt động sau để quản lý bộ xử lý:
 
@@ -94,30 +94,23 @@ Sau đây là một số hoạt động quan trọng mà Hệ điều hành th�
 
 CPU máy tính biết cách thực hiện lệnh. Nhưng nó cần ai đó cho nó biết lệnh nào để thực thi. Đó là công việc của Hệ điều hành (OS). Bất cứ khi nào bạn khởi động máy tính của mình, nó sẽ đọc các byte đầu tiên trên Ổ đĩa của bạn, nơi nó mong đợi thấy các lệnh để khởi động hệ điều hành.
 
-## **Memory Management**
+## **Chi tiêt về Memory Management**
 
-> [On update ...](https://www.geeksforgeeks.org/memory-management-in-operating-system/)
-Như đã nêu ở trên sơ qua ở trên, giờ chúng ta sẽ đi sâu hơn nữa.
+> [Xem chi tiết](MemoryManagement.md)
 
-Vậy bộ nhớ chính là gì?
-
-Bộ nhớ chính là trung tâm hoạt động của một máy tính hiện đại. Bộ nhớ chính là một mảng lớn các từ hoặc byte, có kích thước từ hàng trăm nghìn đến hàng tỷ. Bộ nhớ chính là kho lưu trữ thông tin có sẵn nhanh chóng được chia sẻ bởi CPU và các thiết bị I/O. Bộ nhớ chính là nơi lưu giữ các chương trình và thông tin khi bộ xử lý sử dụng chúng một cách hiệu quả. Bộ nhớ chính được liên kết với bộ xử lý, vì vậy việc di chuyển các hướng dẫn và thông tin vào và ra khỏi bộ xử lý là cực kỳ nhanh chóng. Bộ nhớ chính còn được gọi là RAM (Bộ nhớ truy cập ngẫu nhiên). Bộ nhớ này là bộ nhớ dễ bay hơi.RAM bị mất dữ liệu khi xảy ra sự cố mất điện.
-
-### **Process Management**
+### **Chi tiêt về Process Management**
 
 > [Xem chi tiết](ProcessManagement.md)
 
-### **Interprocess Communication**
+### **Chi tiêt về Interprocess Communication**
 
 > [On update ...](https://www.geeksforgeeks.org/inter-process-communication-ipc/)
 
-### **Threads and Concurrency**
+### **Chi tiêt về Threads and Concurrency**
 
 > [On update ... Thread](https://www.backblaze.com/blog/whats-the-diff-programs-processes-and-threads/)
-
 > [On update ... Concurrency](https://www.javatpoint.com/concurrency-in-operating-system)
 
 ### *I/O Management**
 
 > [On update ...](https://www.tutorialspoint.com/operating_system/os_io_hardware.htm)
-

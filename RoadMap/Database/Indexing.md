@@ -4,11 +4,16 @@ Hiệu suất là điều cực kỳ quan trọng trong nhiều sản phẩm ti�
 
 Các nhà phát triển xử lý cơ sở dữ liệu quan hệ (relational databases) đã từng sử dụng hoặc ít nhất là đã nghe nói về lập index và đó là một khái niệm rất phổ biến trong thế giới cơ sở dữ liệu. Tuy nhiên, phần quan trọng nhất là phải hiểu những cái gì cần lập index & làm cách nào để lập index giúp tốc độ truy vấn tăng. Để làm được điều đó, bạn cần phải hiểu cách mà bạn sẽ truy vấn các bảng trong cơ sở dữ liệu của mình. Chỉ có thể tạo một index phù hợp khi bạn biết chính xác bạn phải truy vấn dữ liệu như thế nào và dữ liệu được trả về ra sao.
 
-Theo thuật ngữ đơn giản, một index ánh xạ các khóa tìm kiếm tới dữ liệu tương ứng trên đĩa bằng cách sử dụng các cấu trúc dữ liệu trong bộ nhớ và trên đĩa khác nhau. Index được sử dụng để tăng tốc độ tìm kiếm bằng cách giảm số lượng record để tìm kiếm.
+Theo thuật ngữ đơn giản, một index ánh xạ các khóa tìm kiếm tới dữ liệu tương ứng trên đĩa bằng cách sử dụng các cấu trúc dữ liệu trong bộ nhớ và trên đĩa khác nhau. Index được sử dụng để tăng tốc độ tìm kiếm bằng cách giảm số lượng record không liên quan tới câu truy vấn.
 
-Chủ yếu là một index được tạo trên các cột được chỉ định trong mệnh đề `WHERE` của truy vấn khi cơ sở dữ liệu truy xuất và lọc dữ liệu từ các bảng dựa trên các cột đó. Nếu bạn không tạo index, cơ sở dữ liệu sẽ quét tất cả các hàng, lọc ra các hàng phù hợp và trả về kết quả. Với hàng triệu record, thao tác quét này có thể mất nhiều giây và thời gian phản hồi cao này khiến các API & ứng dụng chậm hơn và không sử dụng được. Hãy xem một ví dụ -
+>record: hiểu nôm na là một mẩu dữ liệu trong database.
 
-Ở đây sử dụng MySQL với công cụ cơ sở dữ liệu mặc định là InnoDB, mặc dù vậy nhưng các khái niệm được giải thích trong bài viết này ít nhiều giống nhau trong các máy chủ cơ sở dữ liệu khác cũng như Oracle, MSSQL, v.v.
+Khi sử dụng mệnh đề `WHERE` để truy vấn dữ liệu, cơ sở dữ liệu sẽ truy xuất và lọc dữ liệu từ các bảng dựa trên các cột đó. Nếu bạn không tạo index, cơ sở dữ liệu sẽ quét tất cả các hàng, lọc ra các hàng phù hợp và trả về kết quả. Với hàng triệu record, thao tác quét này có thể mất nhiều giây và thời gian phản hồi cao này khiến các API & ứng dụng chậm hơn và không sử dụng được.
+
+>API: là viết tắt của Application Programming Interface – phương thức trung gian kết nối các ứng dụng và thư viện khác nhau. </br>
+Nó cung cấp khả năng truy xuất đến một tập các hàm hay dùng, từ đó có thể trao đổi dữ liệu giữa các ứng dụng.
+
+Hãy xem một ví dụ -
 
 Tạo một bảng có tên `index_demo` với cú pháp sau:
 
@@ -35,7 +40,7 @@ EXPLAIN SELECT * FROM index_demo WHERE name = 'alex';
 
 !['...'](img/cTrVkwvORbzU51MvqnKt7sDTHfQznnjKKFsJ.png)
 
-`EXPLAIN` hiển thị cách công cụ truy vấn lập kế hoạch thực hiện truy vấn. Trong ảnh chụp màn hình ở trên, bạn có thể thấy rằng cột `rows` trả về `5` và `possible_keys` trả về `null`. `possible_keys` đại diện cho tất cả các chỉ số có sẵn có thể được sử dụng trong truy vấn này. Cột `key` biểu thị loại index nào được sử dụng trong truy vấn này.
+`EXPLAIN` hiển thị cách công cụ truy vấn lập kế hoạch thực hiện truy vấn. Trong ảnh chụp màn hình ở trên, bạn có thể thấy rằng cột `rows` trả về `5` (tức là có 5 record trong bảng) và `possible_keys` trả về `null`. `possible_keys` đại diện cho tất cả các index có sẵn có thể được sử dụng, còn cột `key` biểu thị loại index nào được sử dụng trong truy vấn này. Nhưng hiện tại không có index nào trong bảng nên 2 cột này đều trả về `null`.
 
 ## **Primary Key**
 
@@ -53,7 +58,7 @@ Thông thường, chúng ta xác định trường `id` là `AUTO INCREMENT` tro
 
 ## **Điều gì sẽ xảy ra nếu bạn không tự tạo bất kỳ primary key nào?**
 
-Không bắt buộc phải tự tạo primary key. Nếu bạn chưa xác định bất kỳ primary key nào, InnoDB sẽ ngầm tạo một khóa cho bạn vì InnoDB theo thiết kế phải có một primary key trong mỗi bảng. Vì vậy, sau khi bạn tạo primary key cho bảng đó, InnoDB sẽ xóa primary key được xác định tự động trước đó.
+Không bắt buộc phải tự tạo primary key. Nếu bạn chưa xác định bất kỳ primary key nào, InnoDB sẽ ngầm tạo một khóa cho bạn, vì InnoDB theo thiết kế phải có một primary key trong mỗi bảng. Vậy nên sau khi bạn tạo primary key cho bảng đó, InnoDB sẽ xóa primary key được xác định tự động trước đó.
 
 Vì hiện tại chúng ta không có bất kỳ primary key nào được xác định, hãy xem InnoDB theo mặc định sẽ tạo ra những gì cho chúng ta:
 
@@ -69,7 +74,7 @@ SHOW EXTENDED INDEX FROM index_demo;
 
 ## **Sự khác biệt giữa key và index là gì?**
 
-Mặc dù các thuật ngữ `key` và `index` được sử dụng thay thế cho nhau, nhưng `key` có nghĩa là một ràng buộc áp đặt lên hành vi của cột. Trong trường hợp này, ràng buộc là primary key không được phép rỗng, là trường dùng để xác định mỗi hàng. Mặt khác, `index` là một cấu trúc dữ liệu đặc biệt giúp tạo điều kiện tìm kiếm dữ liệu trên bảng.
+Mặc dù các thuật ngữ `key` và `index` được sử dụng thay thế cho nhau, nhưng `key` có nghĩa là một ràng buộc áp đặt lên hành vi của cột, trong trường hợp này primary key không được phép rỗng, là trường dùng để xác định mỗi hàng. Còn `index` là một cấu trúc dữ liệu đặc biệt giúp tạo ra các điều kiện trong mệnh đề `WHERE` để tìm kiếm dữ liệu trên bảng.
 
 Bây giờ, hãy tạo index chính trên `phone_no` và kiểm tra index đã tạo:
 
@@ -116,7 +121,7 @@ EXPLAIN SELECT * FROM index_demo WHERE phone_no = '9281072002';
 
 ![''](img/TJz8cx0CrDPswJzfooUNA5HThlP5bAqZ5f8w.png)
 
-Trong ảnh chụp nhanh này, hãy lưu ý rằng cột `rows` chỉ trả về `1`, cả `possible_keys` và `key` đều trả về `PRIMARY`. Vì vậy, về cơ bản, điều đó có nghĩa là bằng cách sử dụng primary index có tên là `PRIMARY` (tên được gán tự động khi bạn tạo primary key), trình tối ưu hóa truy vấn chỉ cần truy cập trực tiếp vào record và tìm nạp nó. Nó rất hiệu quả. Đây chính xác là mục đích của một index - để giảm phạm vi tìm kiếm và nguyên sử dụng.
+Trong ảnh, cột `rows` chỉ trả về `1`, cả `possible_keys` và `key` đều trả về `PRIMARY`, có nghĩa là bằng cách sử dụng primary index có tên là `PRIMARY` (tên được gán tự động khi bạn tạo primary key), trình tối ưu hóa truy vấn chỉ cần truy cập trực tiếp vào record và nạp nó. Đây chính xác là mục đích của một index - để giảm phạm vi tìm kiếm và tài nguyên sử dụng.
 
 ## **Clustered Index**
 
@@ -128,15 +133,15 @@ Về mặt vật lý, dữ liệu được tổ chức trên đĩa qua hàng ngh
 
 !["..."](img/aVIkXV0c5nNwQHjL1T501JC0OG-E9iZGzt3H.png)
 
-- Hình chữ nhật lớn màu vàng đại diện cho block đĩa/block dữ liệu.
+- Hình chữ nhật lớn màu vàng nhạt đại diện cho block đĩa/block dữ liệu.
 
-- Các hình chữ nhật màu xanh đại diện cho dữ liệu được lưu trữ dưới dạng các hàng bên trong block đó.
+- Các hình chữ nhật màu xanh dương nhạt đại diện cho dữ liệu được lưu trữ dưới dạng các hàng bên trong block đó.
 
-- Khu vực chân trang biểu thị index của block, nơi các hình chữ nhật nhỏ màu đỏ nằm theo thứ tự được sắp xếp một cách cụ thể, nó là những con trỏ trỏ đến vị trí của record.
+- Khu vực chân trang biểu thị index của block, nơi các hình chữ nhật nhỏ màu đỏ nhạt nằm theo thứ tự được sắp xếp một cách cụ thể, nó là những con trỏ trỏ đến vị trí của record.
 
-Các record được lưu trữ trên block đĩa theo bất kỳ thứ tự tùy ý nào. Bất cứ khi nào các record mới được thêm vào, chúng sẽ được thêm vào không gian có sẵn tiếp theo, và record được cập nhật, hệ điều hành sẽ quyết định xem record đó vẫn có thể vừa với vị trí cũ hay phải được phân bổ một vị trí mới.
+Các record được lưu trữ trên block đĩa theo thứ tự tùy ý. Bất cứ khi nào các record mới được thêm vào, chúng sẽ được thêm vào không gian có sẵn tiếp theo, còn khi record được cập nhật, hệ điều hành sẽ quyết định xem record đó vẫn có thể vừa với vị trí cũ hay phải được phân bổ một vị trí mới.
 
-Vì vậy, vị trí của các record được hệ điều hành xử lý hoàn toàn và các record độc lập với nhau. Để tìm nạp các record chỉ cần sử dụng các con trỏ ở phần chân trang. Mỗi khi một record được thay đổi hoặc tạo ra, index sẽ được điều chỉnh.
+Vì vậy, vị trí của các record hoàn toàn được hệ điều hành quản lý và các record đó độc lập với nhau. Để tìm nạp các record chỉ cần sử dụng các con trỏ ở phần chân trang. Mỗi khi một record được thay đổi hoặc tạo ra, index sẽ được điều chỉnh.
 
 Theo cách này, bạn thực sự không cần quan tâm đến việc chức record vật lý theo một thứ tự nhất định, thay vào đó, một phần index nhỏ được duy trì theo thứ tự đó và việc tìm nạp hoặc duy trì record trở nên rất dễ dàng.
 
