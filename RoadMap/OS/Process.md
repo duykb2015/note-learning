@@ -1,16 +1,14 @@
-# **Process Management**
+# **Process**
 
 ## **Vậy Process là gì?**
 
-**Process** là việc thực thi (execution) một chương trình để thực hiện các hành động được chỉ định. Hệ điều hành giúp bạn tạo, lên lịch và chấm dứt các process được sử dụng bởi CPU. Process được tạo bởi process chính được gọi là process con.
+Những "công việc" mà hệ điều hành thực hiện gọi là `process`, dù tên gọi của chúng khác nhau tùy vào cấu trúc hệ điều hành (batch system hay time-shared system).
 
-Các hoạt động của process có thể được kiểm soát dễ dàng với sự trợ giúp của PCB (Khối điều khiển process). Có thể coi nó như bộ não của process, nơi chứa tất cả các thông tin quan trọng liên quan đến xử lý như process id, priority, state, CPU register, v.v.
+Nhắc lại về định nghĩa, một `process` là một chương trình đang được *thực thi* trên hệ điều hành (tức là chương trình đó đang chạy, đã được tải lên bộ nhớ chính để hoạt động, cụ thể là ram). Nhưng, một chương trình không phải là một `process`. Vì chương trình là một `executable file`, hay một `folder` nằm trên máy.
 
-## **Vậy Process Management là gì?**
-
-**Process management** liên quan đến các nhiệm vụ khác nhau như tạo, lập lịch trình, chấm dứt process và khóa chết (creation, scheduling, termination of processes, dead lock). **Process** là một chương trình đang được thực thi, đây là một phần quan trọng của các hệ điều hành hiện đại. HĐH phải phân bổ tài nguyên cho phép các process chia sẻ và trao đổi thông tin. Nó cũng bảo vệ tài nguyên của từng process khỏi các phương thức khác và cho phép đồng bộ hóa giữa các process.
-
-Công việc của HĐH là quản lý tất cả các process đang chạy của hệ thống. Nó xử lý các hoạt động bằng cách thực hiện các tác vụ như lập lịch process và chẳng hạn như phân bổ tài nguyên.
+> `executable file`: Tập tin *thực thi*, là một tập tin chứa các đoạn mã, một tập hợp các hướng dẫn bộ xử lý (*processor instructions*) được lưu lại trên máy tính. Khi các đoạn mã được tải lên bộ nhớ chính và được *thực thi*  bởi bộ xử lý nó trở thành một process. </br>
+> ***execute***: thực thi là thuật ngữ mô tả quá trình chạy chương trình phần mềm máy tính, tập lệnh hoặc lệnh.</br>
+> ***processor, central processor, or microprocessor or CPU***: là bộ xử lý trung tâm của máy tính. CPU của máy tính xử lý tất cả các hướng dẫn mà nó nhận được từ phần cứng và phần mềm chạy trên máy tính. Ví dụ: CPU đã xử lý các hướng dẫn sử dụng trình duyệt web để mở và hiển thị trang web này trên máy tính của bạn.
 
 ## **Cấu trúc của Process**
 
@@ -24,13 +22,16 @@ Công việc của HĐH là quản lý tất cả các process đang chạy củ
 
 - **Data:** Chứa các biến global (biến dùng chung ở cấp toàn bộ chương trình) và static (loại biến dùng chung ở cấp struct).
 
-- **Text:** Bao gồm hoạt động hiện tại được biểu thị bằng giá trị của `Program Counter` và nội dung của các thanh ghi trên vi xử lý:
+- **Text:** Bao gồm hoạt động hiện tại được biểu thị bằng giá trị của [Program Counter](#process-control-block-pcb) và nội dung của các thanh ghi trên vi xử lý.
 
-## **Process States**
+> Địa chỉ trả về (`returns addresses`) là vị trí ngay sau khi chương trình con được gọi. Nghĩa là, khi một câu lệnh `return` được gọi trong chương trình con hoặc chương trình con hoàn thành, chương trình chính sẽ đi đến địa chỉ trả về và tiếp tục chạy chương trình. </br>
+> Một `routine` hoặc chương trình con (`subroutine`), còn được gọi là `hàm`, `procedure`, `phương thức` và chương trình con (`subprogram`), là code được gọi và thực thi ở bất kỳ đâu trong chương trình.
+
+## **Trạng thái của Process**
 
 !['process states'](./img//122319_0638_ProcessMana2.webp)
 
-**Process States** là một điều kiện của process tại một thời điểm cụ thể. Nó cũng xác định vị trí hiện tại của quá trình.
+**Trạng thái của Process (Process States)** là một điều kiện của process tại một thời điểm cụ thể. Nó cũng xác định vị trí hiện tại của quá trình.
 
 **Một Process có 7 trạng thái, gồm:**
 
@@ -58,11 +59,11 @@ Sau khi hoàn thành mỗi bước, tất cả các tài nguyên và bộ nhớ 
 
 - **Process state:** Trạng thái hiện tại của tiến trình (là một trong các trạng thái ở phần trên)
 
-- **Program counter:** Con trỏ lưu địa chỉ của chỉ dẫn tiếp theo giúp cho tiến trình thực thi (là một phép tính hoặc tương tự).
+- **Program counter:**  chứa địa chỉ (hay trong ngôn ngữ lập trình C, ta gọi nó là con trỏ/pointer) đến lệnh cần thực thi tiếp theo.
 
-- **CPU registers:** Các thanh ghi tiến trình cần sử dụng để thực thi.
+- **Thanh ghi CPU:** Các thanh ghi tiến trình cần sử dụng để thực thi.
 
-- **CPU scheduling information:** Thành phần này bao gồm mức độ ưu tiên của process, bao gồm con trỏ dùng để lập lịch hàng đợi (scheduling queues) và nhiều tham số lập lịch khác.
+- **Thông tin định thời CPU:** Thành phần này bao gồm mức độ ưu tiên của process, quy định process nào thì thực thi trước.
 
 - **Accounting and business information:** Chứa các thông tin về việc sử dụng CPU như thời gian sử dụng phần mềm, số công việc hoặc process, v.v.
 
