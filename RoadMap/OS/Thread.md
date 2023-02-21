@@ -14,6 +14,6 @@ Tuy nhiên, nếu như một thread gặp vấn đề khi xử lý tác vụ.
 
 !['thead error'](img/threaderror.png)
 
-Nó sẽ gây anh hưởng cho toàn bộ các thead còn lại, khiến một process sẽ bị lỗi và phải dừng lại.
+Nó sẽ gây anh hưởng cho toàn bộ các thread còn lại, khiến một process sẽ bị lỗi và phải dừng lại.
 
 !['thead error'](img/errorentierprocess.png)

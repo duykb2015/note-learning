@@ -1,8 +1,9 @@
 # **Client Server**
+
 ## **Nội dung chính**
 
 * *[Client Server architecture](#kiến-trúc-client-server-là-gì)*
-    
+
 * *[Client là gì?](#client-là-gì)*
 
 * [Server là gì?](#server-là-gì)
@@ -11,9 +12,9 @@
 
 * [Các loại kiến trúc Client Server](#các-loại-kiến-trúc-client-server)
 
-# **Kiến trúc Client Server là gì?**
+## **Kiến trúc Client Server là gì?**
 
-Client server là mô hình mạng máy tính gồm có 2 thành phần chính đó là máy khách (client) và máy chủ (server). Server chính là nơi giúp lưu trữ tài nguyên cũng như cài đặt các chương trình dịch vụ theo đúng như yêu cầu của client. Ngược lại, Client bao gồm máy tính cũng như các loại thiết bị điện tử nói chung sẽ tiến hành gửi yêu cầu đến server. 
+Client server là mô hình mạng máy tính gồm có 2 thành phần chính đó là máy khách (client) và máy chủ (server). Server chính là nơi giúp lưu trữ tài nguyên cũng như cài đặt các chương trình dịch vụ theo đúng như yêu cầu của client. Ngược lại, Client bao gồm máy tính cũng như các loại thiết bị điện tử nói chung sẽ tiến hành gửi yêu cầu đến server.
 
 Mô hình mạng Client Server sẽ cho phép mạng tập trung các ứng dụng có cùng chức năng tại một hoặc nhiều dịch vụ file chuyên dụng. Chúng sẽ trở thành trung tâm của hệ thống. Hệ điều hành của mô hình Client server sẽ cho phép người dùng chia sẻ đồng thời cùng một loại tài nguyên mà không giới hạn vị trí địa lý.
 
@@ -43,7 +44,7 @@ Một số Server phổ biến:
 
 Client và Server không nhất thiết phải ở cùng một vị trí. Chúng có thể được đặt ở các vị trí khác nhau hoặc có thể nằm dưới dạng các quy trình khác nhau trên cùng một máy tính. Chúng được kết nối qua Web và tương tác qua giao thức [HTTP](./HTTP.md). Một Server có thể nhận nhiều yêu cầu (request) từ Client, và ngược lại, một Client có thể yêu cầu đến nhiều Server.
 
-# **Cách kiến trúc Client Server hoạt động**
+## **Cách kiến trúc Client Server hoạt động**
 
 ![How Client Server work](./img/Server.png)
 
@@ -67,7 +68,7 @@ Bây giờ, bạn có thể liên kết ví dụ trên với việc truy cập �
 
 Khi trình duyệt web gửi một yêu cầu đến máy chủ với DNS của trang web và máy chủ chấp thuận yêu cầu của khách hàng, nó sẽ gửi một thông báo thành công 200 OK. Thông báo này có nghĩa là máy chủ đã định vị trang web và nó sẽ gửi lại các tệp trang web dưới dạng phần nhỏ dữ liệu cho trình duyệt. Sau đó, trình duyệt sẽ thu thập và lắp ráp các phần nhỏ này lại để tạo thành trang web hoàn chỉnh và hiển thị cho chúng ta.
 
-# **Các loại kiến trúc Client Server**
+## **Các loại kiến trúc Client Server**
 
 Kiến trúc Client-Server có bốn kiểu sau:
 
@@ -89,7 +90,7 @@ Kiến trúc 2 tầng cung cấp môi trường tốt nhất về mặt hiệu s
 
 ### **Kiến trúc 3 tầng**
 
-Kiến trúc 3 tầng liên quan đến một phần mềm trung gian được sử dụng để tương tác giữa máy khách và máy chủ. Mặc dù nó đắt tiền nhưng rất dễ sử dụng. Phần mềm trung gian cải thiện hiệu suất và tính linh hoạt. Nó lưu trữ business và data logic. 
+Kiến trúc 3 tầng liên quan đến một phần mềm trung gian được sử dụng để tương tác giữa máy khách và máy chủ. Mặc dù nó đắt tiền nhưng rất dễ sử dụng. Phần mềm trung gian cải thiện hiệu suất và tính linh hoạt. Nó lưu trữ business và data logic.
 
 Ba lớp trong kiến ​​trúc 3 tầng là:
 
