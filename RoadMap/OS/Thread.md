@@ -1,6 +1,6 @@
 # **Thread**
 
-`Thread` hay luồng là một đơn vị thực thi của `process`. Một process có ít nhất một thread, được gọi là `main thread`. Một process có thể có nhiều thread.
+`Thread` hay luồng là một đơn vị thực thi của `process`. Một process có ít nhất một thread, được gọi là `main thread`, và có thể có nhiều thread phụ.
 
 Như đã nêu ở trong phần `process` các thành phần `stack`, `registers` và `program counters` là một phần của process, nhưng chính xác hơn thì những thành phần này thuộc về một thread.
 
