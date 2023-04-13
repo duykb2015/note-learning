@@ -46,9 +46,9 @@ Caching được sử dụng để cải thiện hiệu suất của hệ thốn
 
 * **Khi chi phí cho việc truy cập dữ liệu là đắt đỏ:** Nếu chi phí cho việc truy cập dữ liệu là đắt đỏ, việc sử dụng caching giúp giảm chi phí và tăng hiệu quả của hệ thống.
 
-## **Nhược điểm của caching**
+> Tuy nhiên, cũng cần lưu ý rằng việc sử dụng caching không phải là giải pháp cho mọi trường hợp. Có những trường hợp khi việc sử dụng caching có thể gây ra các vấn đề về đồng bộ hóa dữ liệu hoặc gây ra tình trạng lỗi vì dữ liệu trong cache không còn đúng. Do đó, trước khi sử dụng caching, cần phải đánh giá cẩn thận và đảm bảo rằng việc sử dụng caching sẽ giúp cải thiện hiệu suất của hệ thống một cách an toàn và hiệu quả.
 
-Tuy nhiên, cũng cần lưu ý rằng việc sử dụng caching không phải là giải pháp cho mọi trường hợp. Có những trường hợp khi việc sử dụng caching có thể gây ra các vấn đề về đồng bộ hóa dữ liệu hoặc gây ra tình trạng lỗi vì dữ liệu trong cache không còn đúng. Do đó, trước khi sử dụng caching, cần phải đánh giá cẩn thận và đảm bảo rằng việc sử dụng caching sẽ giúp cải thiện hiệu suất của hệ thống một cách an toàn và hiệu quả.
+## **Nhược điểm của caching**
 
 Mặc dù việc caching có nhiều lợi ích, nhưng nó cũng có một số nhược điểm như sau:
 
