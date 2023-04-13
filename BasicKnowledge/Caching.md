@@ -52,11 +52,11 @@ Mặc dù việc caching có nhiều lợi ích, nhưng nó cũng có một số
 
 * **Dữ liệu cũ:** Nếu dữ liệu trong cache không được cập nhật thường xuyên hoặc cache không được xóa định kỳ, người dùng có thể nhận được dữ liệu cũ, không chính xác hoặc không đầy đủ.
 
-* **Chi phí bộ nhớ:** Lưu trữ dữ liệu trong cache đòi hỏi chi phí bộ nhớ và không phải lúc nào cũng có đủ bộ nhớ để lưu trữ tất cả các dữ liệu trong cache.
+* **Chi phí bộ nhớ:** Lưu trữ dữ liệu trong cache đòi hỏi chi phí bộ nhớ và không phải lúc nào cũng có đủ bộ nhớ để lưu trữ tất cả các dữ liệu trong cache vì nếu dữ liệu quá lớn, cache có thể dẫn đến sự lãng phí tài nguyên.
+
+* **Sự mất mát tính toàn vẹn:** Nếu cache bị hỏng hoặc bị mất đi, dữ liệu lưu trữ trong cache sẽ không thể phục hồi và có thể dẫn đến mất mát tính toàn vẹn của dữ liệu.
 
 * **Không phù hợp với dữ liệu động:** Cache là phù hợp với dữ liệu tĩnh nhưng không phù hợp với dữ liệu động. Nếu dữ liệu thay đổi thường xuyên, việc cập nhật cache sẽ trở nên phức tạp và tốn kém.
-
-* **Tốn thời gian và tài nguyên:** Việc đưa dữ liệu vào và lấy dữ liệu ra khỏi cache có thể tốn thời gian và tài nguyên máy tính.
 
 * **Phức tạp khi phân tán:** Khi ứng dụng phân tán trên nhiều máy chủ, việc quản lý và cập nhật cache có thể trở nên phức tạp và đòi hỏi nhiều thời gian và công sức.
 
