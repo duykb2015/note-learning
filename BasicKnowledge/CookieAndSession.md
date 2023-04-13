@@ -31,11 +31,11 @@ Không như **session cookie**, **persistent cookie** (tạm dịch: cookie cố
 
 ### **Third-party cookie**
 
-Thông thường, thông tin về tên miền của một cookie sẽ trùng với tên miền được hiển thị ở thanh địa chỉ của trình duyệt. Đây được gọi là first-party cookie (tạm dịch: cookie bên thứ nhất). Trái với nó, một third-party cookie (tạm dịch: cookie bên thứ ba) sẽ thuộc một tên miền khác với tên miền trên thanh địa chỉ. Các cookie loại này thường gặp trong trường hợp một website hiển thị thông tin từ các website khác, ví dụ như các banner quảng cáo từ website khác. Third-party cookie được dùng rộng rãi trên web. Theo một khảo sát được thực hiện năm 2018, trong 938,093 trang web phổ biến theo Alexa, hơn 70% số trang được tải xuống có chứa third-party cookie với số lượng hơn 11 cookie mỗi trang tin.
+Thông thường, thông tin về tên miền của một cookie sẽ trùng với tên miền được hiển thị ở thanh địa chỉ của trình duyệt. Đây được gọi là first-party cookie (tạm dịch: cookie bên thứ nhất). Trái với nó, một third-party cookie (tạm dịch: cookie bên thứ ba) sẽ thuộc một tên miền khác với tên miền trên thanh địa chỉ. Các cookie loại này thường gặp trong trườn+g hợp một website hiển thị thông tin từ các website khác, ví dụ như các banner quảng cáo từ website khác. Third-party cookie được dùng rộng rãi trên web. Theo một khảo sát được thực hiện năm 2018, trong 938,093 trang web phổ biến theo Alexa, hơn 70% số trang được tải xuống có chứa third-party cookie với số lượng hơn 11 cookie mỗi trang tin.
 
 ### **Supercookie**
 
-**Supercookie** (tạm dịch: cookie chủ) là loại cookie xuất phát từ các tên miền ở tầng cao nhất (ví dụ như.com) hay các hậu tố công cộng (public suffix) như.co.uk. Các loại cookie thông thường khác, ngược lại, xuất phát từ một tên miền, ví dụ như example.com. Supercookie có thể là một mối nguy hiểm tiềm tàng vì các supercookie có thể được dùng để nguỵ trang một yêu cầu không hợp pháp trông như một yêu cầu hợp pháp từ người dùng.
+**Supercookie** (tạm dịch: cookie chủ) là loại cookie xuất phát từ các tên miền ở tầng cao nhất (ví dụ như.com) hay các hậu tố công cộng (public suffix) như .co.uk. Các loại cookie thông thường khác, ngược lại, xuất phát từ một tên miền, ví dụ như example.com. Supercookie có thể là một mối nguy hiểm tiềm tàng vì các supercookie có thể được dùng để nguỵ trang một yêu cầu không hợp pháp trông như một yêu cầu hợp pháp từ người dùng.
 
 **Zombie cookie**
 **Zombie cookie** (tạm dịch: cookie ma) là loại bị xoá đi.
