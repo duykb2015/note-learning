@@ -1,12 +1,10 @@
-# **Caching**
+# **Cache**
 
-## **Caching là gì**
+## **Cache là gì**
 
-**Cache** (hay dịch tiếng Việt là *bộ nhớ đệm*, đọc là `kaSH`) là nơi lưu các tập dữ liệu, thường chỉ có tính chất tạm thời, để giúp cho các yêu cầu (request) trong tương lai đối với dữ liệu những dữ liệu này được cung cấp một cách nhanh nhất có thể. Dữ liệu trong **cache** được lưu trữ trong phần cứng truy cập nhanh như **RAM**.
+**Cache** (hay dịch tiếng Việt là *bộ nhớ đệm*, đọc là `kaSH`) là một kỹ thuật được sử dụng trong công nghệ thông tin để tăng tốc độ truy xuất dữ liệu bằng cách lưu trữ dữ liệu tạm thời (temporary data storage) trong một vùng bộ nhớ nhanh hơn để truy cập nhanh hơn khi cần thiết. Các dữ liệu được lưu trữ trong cache có thể là kết quả của việc tính toán hoặc dữ liệu đã được lưu trữ từ trước đó
 
-**Caching** là một kỹ thuật tăng tốc độ truy xuất dữ liệu và giảm tải cho hệ thống một cách hiểu quả bằng cách lưu trữ một bản sao của dữ liệu nào đó trong bộ nhớ trung gian, nhằm giảm thiểu thời gian truy cập dữ liệu từ các nguồn lưu trữ chậm hoặc tốn kém như bộ nhớ chính, đĩa cứng hay mạng. Các dữ liệu được lưu trữ trong bộ nhớ cache sẽ được sử dụng nếu có yêu cầu truy cập dữ liệu tương tự trong tương lai. Vì bộ nhớ cache có thời gian truy cập nhanh hơn so với bộ nhớ chính hay đĩa cứng, việc sử dụng caching giúp tăng tốc độ xử lý và giảm thiểu thời gian chờ đợi của người dùng khi truy cập vào dữ liệu. Caching được sử dụng rộng rãi trong nhiều ứng dụng và hệ thống như trình duyệt web, cơ sở dữ liệu, ứng dụng di động, trò chơi, và các hệ thống tìm kiếm.
-
-## **Caching lưu dữ liệu như thế nào**
+## **Cache lưu dữ liệu như thế nào**
 
 > Trong laravel lumen cache được lưu dưới dạng `key -  value`
 
@@ -32,7 +30,7 @@ Caching được sử dụng để cải thiện hiệu suất của hệ thốn
 
 * ***Giảm chi phí vận hành hệ thống:*** Khi hệ thống hoạt động nhanh hơn, tốn ít tài nguyên hơn và cung cấp trải nghiệm người dùng tốt hơn, chi phí vận hành hệ thống cũng giảm đi. Điều này giúp tăng hiệu quả hoạt động của hệ thống và giảm chi phí cho doanh nghiệp.
 
-## **Sử dụng caching khi nào**
+## **Sử dụng Cache khi nào**
 
 * **Khi dữ liệu được truy cập thường xuyên:** Nếu dữ liệu được truy cập thường xuyên, việc lưu trữ dữ liệu trong bộ nhớ cache sẽ giúp tăng tốc độ truy cập và giảm thời gian phản hồi của ứng dụng.
 
@@ -46,7 +44,7 @@ Caching được sử dụng để cải thiện hiệu suất của hệ thốn
 
 > Tuy nhiên, cũng cần lưu ý rằng việc sử dụng caching không phải là giải pháp cho mọi trường hợp. Có những trường hợp khi việc sử dụng caching có thể gây ra các vấn đề về đồng bộ hóa dữ liệu hoặc gây ra tình trạng lỗi vì dữ liệu trong cache không còn đúng. Do đó, trước khi sử dụng caching, cần phải đánh giá cẩn thận và đảm bảo rằng việc sử dụng caching sẽ giúp cải thiện hiệu suất của hệ thống một cách an toàn và hiệu quả.
 
-## **Nhược điểm của caching**
+## **Nhược điểm của Cache**
 
 Mặc dù việc caching có nhiều lợi ích, nhưng nó cũng có một số nhược điểm như sau:
 
@@ -62,7 +60,7 @@ Mặc dù việc caching có nhiều lợi ích, nhưng nó cũng có một số
 
 Vì vậy, khi sử dụng cache, người lập trình cần cân nhắc kỹ lưỡng giữa lợi ích và nhược điểm của cache và xem xét cách tối ưu hóa việc sử dụng cache để đảm bảo hiệu quả và hiệu suất của ứng dụng.
 
-## **Ứng dụng của caching**
+## **Ứng dụng của Cache**
 
 Caching được sử dụng rộng rãi trong nhiều lĩnh vực, bao gồm:
 
