@@ -2,7 +2,7 @@
 
 ## **Caching là gì**
 
-<span style="font-size:16px">
+<span style="font-size:18px">
 **Cache** (hay dịch tiếng Việt là *bộ nhớ đệm*, đọc là `kaSH`) là nơi lưu các tập dữ liệu, thường chỉ có tính chất tạm thời, để giúp cho các yêu cầu (request) trong tương lai đối với dữ liệu những dữ liệu này được cung cấp một cách nhanh nhất có thể. Dữ liệu trong **cache** được lưu trữ trong phần cứng truy cập nhanh như **RAM**.
 
 **Caching** là một kỹ thuật tăng tốc độ truy xuất dữ liệu và giảm tải cho hệ thống một cách hiểu quả bằng cách lưu trữ một bản sao của dữ liệu nào đó trong bộ nhớ trung gian, nhằm giảm thiểu thời gian truy cập dữ liệu từ các nguồn lưu trữ chậm hoặc tốn kém như bộ nhớ chính, đĩa cứng hay mạng. Các dữ liệu được lưu trữ trong bộ nhớ cache sẽ được sử dụng nếu có yêu cầu truy cập dữ liệu tương tự trong tương lai. Vì bộ nhớ cache có thời gian truy cập nhanh hơn so với bộ nhớ chính hay đĩa cứng, việc sử dụng caching giúp tăng tốc độ xử lý và giảm thiểu thời gian chờ đợi của người dùng khi truy cập vào dữ liệu. Caching được sử dụng rộng rãi trong nhiều ứng dụng và hệ thống như trình duyệt web, cơ sở dữ liệu, ứng dụng di động, trò chơi, và các hệ thống tìm kiếm.
