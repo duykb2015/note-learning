@@ -2,7 +2,7 @@
 
 ## **Cache là gì**
 
-**Cache** (hay dịch tiếng Việt là *bộ nhớ đệm*, đọc là `kaSH`) là một kỹ thuật được sử dụng trong công nghệ thông tin để tăng tốc độ truy xuất dữ liệu bằng cách lưu trữ dữ liệu tạm thời (temporary data storage) trong một vùng bộ nhớ nhanh hơn để truy cập nhanh hơn khi cần thiết. Các dữ liệu được lưu trữ trong cache có thể là kết quả của việc tính toán hoặc dữ liệu đã được lưu trữ từ trước đó
+**Cache** (hay dịch tiếng Việt là *bộ nhớ đệm*, đọc là `kaSH`) là một kỹ thuật được sử dụng trong công nghệ thông tin để tăng tốc độ truy xuất dữ liệu bằng cách lưu trữ dữ liệu tạm thời (temporary data storage) trong một vùng bộ nhớ có tốc độ truy xuất cao để truy cập nhanh hơn khi cần thiết. Các dữ liệu được lưu trữ trong cache có thể là kết quả của việc tính toán hoặc dữ liệu đã được lưu trữ từ trước đó
 
 ## **Cache lưu dữ liệu như thế nào**
 
