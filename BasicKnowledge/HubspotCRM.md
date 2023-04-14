@@ -33,33 +33,15 @@ Tóm lại, HubSpot CRM là một công cụ quản lý quan hệ khách hàng �
 
 ****HubSpot CRM** Owners** (chủ sở hữu **HubSpot CRM**) là người dùng được cấp quyền sở hữu và quản lý tài khoản ****HubSpot CRM**** của công ty hoặc tổ chức. Với vai trò này, người dùng được phép quản lý thông tin liên lạc của khách hàng, quản lý các tương tác với khách hàng, quản lý các giao dịch bán hàng, quản lý quy trình bán hàng và các hoạt động marketing.
 
-CRM giúp doanh nghiệp tăng tính tương tác và đồng bộ hóa thông tin giữa các bộ phận và các kênh khác nhau, từ việc tiếp nhận yêu cầu hỗ trợ đến việc theo dõi đơn hàng và lịch sử tương tác của khách hàng. Nó cũng cung cấp khả năng phân tích dữ liệu để đưa ra các quyết định kinh doanh dựa trên thông tin từ khách hàng và mối quan hệ với họ. CRM có thể được sử dụng trong nhiều lĩnh vực khác nhau, từ bán lẻ đến dịch vụ tài chính, bất động sản, y tế và giáo dục.
-
-Những người dùng được chỉ định là **HubSpot CRM** Owners có thể cấp quyền truy cập cho các thành viên khác trong tổ chức, cho phép họ truy cập và sử dụng các tính năng của **HubSpot CRM** để quản lý tương tác với khách hàng và quản lý các hoạt động bán hàng. Chủ sở hữu **HubSpot CRM** có thể quản lý cấp độ truy cập của từng thành viên và kiểm soát việc chia sẻ thông tin khách hàng.
+Những người dùng được chỉ định là **HubSpot CRM Owners** có thể cấp quyền truy cập cho các thành viên khác trong tổ chức, cho phép họ truy cập và sử dụng các tính năng của **HubSpot CRM** để quản lý tương tác với khách hàng và quản lý các hoạt động bán hàng. **HubSpot CRM Owners** có thể quản lý cấp độ truy cập của từng thành viên và kiểm soát việc chia sẻ thông tin khách hàng.
 
 Điều này giúp cho tổ chức có thể quản lý được quá trình tiếp cận khách hàng, cải thiện quy trình bán hàng, tối ưu hoá hoạt động marketing và đưa ra các quyết định chiến lược thông minh để phát triển kinh doanh.
 
-## **HubSpot CRM Owners dùng như thế nào?**
-
-**HubSpot CRM** Owners được sử dụng để gán người dùng cụ thể cho danh bạ, công ty, giao dịch, vé hoặc tương tác trong **HubSpot CRM**. Khi một người dùng được chỉ định làm chủ sở hữu, họ có thể truy cập và quản lý thông tin liên quan đến đối tượng mà họ được chỉ định làm chủ sở hữu. Một đối tượng trong **HubSpot CRM** có thể có nhiều chủ sở hữu, và bạn có thể tạo thuộc tính tùy chỉnh để gán nhiều chủ sở hữu cho một đối tượng.
-
-Bạn có thể sử dụng các API của HubSpot để lấy thông tin về chủ sở hữu, bao gồm ID và địa chỉ email của họ. Sau đó, bạn có thể gán thông tin này cho các bản ghi CRM trong HubSpot hoặc thông qua cuộc gọi API thay đổi thuộc tính. Việc sử dụng **HubSpot CRM Owners** giúp cho quản lý thông tin trong HubSpot trở nên dễ dàng hơn, đặc biệt là trong các tổ chức có nhiều người dùng và nhiều đối tượng khác nhau cần được quản lý và phân chia công việc.
-
-## **HubSpot CRM Owners khi nào?**
-
-HubSpot CRM Owners được sử dụng khi bạn muốn quản lý thông tin về các chủ sở hữu của các đối tượng trong HubSpot CRM.
-
-Các đối tượng này có thể là khách hàng, công ty, giao dịch, vé hỗ trợ hoặc tương tác. Khi bạn chỉ định chủ sở hữu cho các đối tượng này, bạn có thể kiểm soát quyền truy cập của người dùng vào các bản ghi tương ứng và phân chia công việc một cách rõ ràng.
-
-Ví dụ, trong một công ty lớn, nhiều nhân viên có thể làm việc với các khách hàng khác nhau. Khi sử dụng HubSpot CRM Owners, mỗi khách hàng có thể được gán cho một chủ sở hữu, đảm bảo rằng các nhân viên chỉ có thể truy cập thông tin liên quan đến khách hàng mà họ đang làm việc.
-
-Việc sử dụng HubSpot CRM Owners cũng giúp cho việc phân chia và quản lý công việc giữa các nhân viên trở nên dễ dàng hơn. Với chức năng gán nhiều chủ sở hữu cho một đối tượng, nhiều người có thể chia sẻ trách nhiệm và làm việc cùng nhau trên cùng một đối tượng trong HubSpot CRM.
-
 ## **Ai là người sẽ sử dụng HubSpot CRM Owners?**
 
-HubSpot CRM Owners có thể được sử dụng bởi các công ty và tổ chức bất kỳ, đặc biệt là những doanh nghiệp có nhu cầu quản lý khách hàng, giao dịch, vé hỗ trợ hoặc tương tác trong một môi trường trung tâm.
+**HubSpot CRM Owners** có thể được sử dụng bởi các công ty và tổ chức bất kỳ, đặc biệt là những doanh nghiệp có nhu cầu quản lý khách hàng, giao dịch, vé hỗ trợ hoặc tương tác trong một môi trường trung tâm.
 
-Người sử dụng HubSpot CRM Owners có thể là nhân viên bán hàng, nhân viên marketing, nhân viên dịch vụ khách hàng hoặc các quản lý và nhà quản lý bộ phận. Các người này sẽ sử dụng HubSpot CRM Owners để gán chủ sở hữu cho các đối tượng trong HubSpot CRM, quản lý quyền truy cập vào các bản ghi tương ứng và phân chia công việc một cách rõ ràng.
+Người sử dụng **HubSpot CRM Owners** có thể là nhân viên bán hàng, nhân viên marketing, nhân viên dịch vụ khách hàng hoặc các quản lý và nhà quản lý bộ phận. Các người này sẽ sử dụng **HubSpot CRM Owners** để gán chủ sở hữu cho các đối tượng trong HubSpot CRM, quản lý quyền truy cập vào các bản ghi tương ứng và phân chia công việc một cách rõ ràng.
 
-Ngoài ra, các nhà phát triển hoặc các chuyên gia tích hợp cũng có thể sử dụng HubSpot CRM Owners để tích hợp dữ liệu từ HubSpot vào các hệ thống khác hoặc xây dựng các ứng dụng và tiện ích phụ trợ cho HubSpot CRM.
+Ngoài ra, các nhà phát triển hoặc các chuyên gia tích hợp cũng có thể sử dụng **HubSpot CRM Owners** để tích hợp dữ liệu từ HubSpot vào các hệ thống khác hoặc xây dựng các ứng dụng và tiện ích phụ trợ cho HubSpot CRM.
 
